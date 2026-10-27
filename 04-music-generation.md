@@ -49,7 +49,7 @@ The pattern that works end to end on GMI:
 script (LLM) -> voice (TTS) -> visuals (image + image-to-video) -> music (Music 3.0) -> assembly (ffmpeg)
 ```
 
-Every stage is one API family, one account, one spend gate. The music stage is the cheapest of all of them and adds the most "produced" feeling per cent.
+Every stage is one API family, one account, one spend gate. The music stage is cheaper than the visual stages and adds the most "produced" feeling per cent.
 
 ## Cost reality
 

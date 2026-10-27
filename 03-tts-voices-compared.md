@@ -4,7 +4,7 @@
 
 ## The two engines
 
-GMI Cloud serves two strong TTS families. They price and behave differently:
+GMI Cloud serves several TTS families (including Resemble Chatterbox and earlier Inworld and MiniMax lines). This guide compares the two it uses most:
 
 | | Inworld TTS 2 | MiniMax Speech 2.8 HD |
 |---|---|---|
