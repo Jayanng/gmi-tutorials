@@ -64,7 +64,3 @@ Listen to the same text across engines before choosing. The difference in warmth
 
 A client timeout on a TTS submit is not a failure. See `02-spend-gates-and-recovery.md`: recover via `list_generations` filtered to the model, then fetch by request_id. When recovering timed-out batches you cannot map request_id to voice directly; infer by creation order, and if any line was previously generated as a sample, match by exact duration.
 
-
----
-
-*Disclosure: this tutorial was produced as part of the GMI Clouder program (paid). All GMI outputs shown are real generations from the author's own account.*

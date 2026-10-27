@@ -93,7 +93,3 @@ In production this gate has never lost an asset and never double-charged. The on
 
 *All samples in `samples/` were generated through these flows.*
 
-
----
-
-*Disclosure: this tutorial was produced as part of the GMI Clouder program (paid). All GMI outputs shown are real generations from the author's own account.*

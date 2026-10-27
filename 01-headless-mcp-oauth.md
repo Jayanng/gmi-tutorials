@@ -71,7 +71,3 @@ Call a free tool first. `search_docs` or `get_account_summary` are read-only and
 
 That is the whole setup. Once the token is stored correctly and refreshing, the agent gets ten GMI tools over one connection.
 
-
----
-
-*Disclosure: this tutorial was produced as part of the GMI Clouder program (paid). All GMI outputs shown are real generations from the author's own account.*
