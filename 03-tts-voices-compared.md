@@ -9,14 +9,14 @@ GMI Cloud serves two strong TTS families. They price and behave differently:
 | | Inworld TTS 2 | MiniMax Speech 2.8 HD |
 |---|---|---|
 | Voices | 282 | Personality-named set |
-| Billing | per character (about $0.00345/char discounted) | per 1000 chars (about $0.013 per same line) |
+| Billing | per character (about $0.000025/char list; a 130-char line is about $0.0033) | per 1000 chars (about $0.10/1k; a 130-char line is about $0.013) |
 | Character | conversational, personality-rich | strongest "sounds human" narration |
 | Length limit | roughly 350-750 chars per request before failures | long texts in one shot |
 | Output | OGG_OPUS available directly | mp3/flac (convert for voice apps) |
 
 There is also `inworld-tts-2-flash`, the cheap Inworld variant, good for drafts and bulk lines.
 
-**Cost intuition (pricing at time of writing, October 2026; re-check `estimate_generation`):** a 130-character line is about $0.45 on Inworld vs about $0.002 on MiniMax. For long-form narration MiniMax is dramatically cheaper; for personality and warmth Inworld's premium voices are worth it.
+**Cost intuition (live-tested October 2026; re-check with `estimate_generation`):** a 130-character line costs about $0.0033 on Inworld versus about $0.013 on MiniMax. Per character Inworld is roughly 4x cheaper. MiniMax wins long-form on mechanics, not price: it takes long texts in a single request, while Inworld needs chunking on long scripts.
 
 ## The samples
 
@@ -25,19 +25,19 @@ All files in `samples/tts/` were generated on GMI Cloud:
 - `gmi_blake_story_condensed.ogg` — Inworld Blake, CREATIVE delivery, storytelling
 - `gmi_ronald.ogg`, `gmi_amina.ogg`, `gmi_chioma.ogg` — Inworld voice personalities
 - `ng_voice_male.mp3`, `ng_voice_female.mp3` — Nigerian-accented Inworld voices (the voice enum includes Emeka, Tunde, Chioma, Folake, Amara, and Amina)
-- `gmi_minimax_storyteller.mp3` — MiniMax `English_CaptivatingStoryteller`
+- `gmi_minimax_storyteller.mp3` — MiniMax `English_CaptivatingStoryteller` (the two MiniMax `.ogg` files below were converted from mp3 output with the rule-5 ffmpeg command)
 - `gmi_minimax_deepgentleman.ogg` — MiniMax `English_Deep-VoicedGentleman`
 - `gmi_minimax_magnetic.ogg` — MiniMax magnetic narration voice
 - `n1.mp3`, `n2.mp3` — production narration clips from a finished piece
 
-Listen to the same text across engines before choosing. The difference in warmth is audible in three seconds. Quality impressions in this guide are the author's own from testing, not official product claims.
+Listen to the same text across engines before choosing. The difference in warmth is audible in three seconds. Quality impressions and prices in this guide are the author's own from testing in October 2026, not official product claims.
 
 ## Parameter rules (each of these cost real debugging time)
 
 1. **Voice IDs are an enum of exact strings.** Read the model's `voice_id` enum before submitting. Values are case-sensitive. Include `voice_id` explicitly on submit even when the schema shows a default
-2. **Do NOT pass a `language` tag to Inworld.** Something like `en-NG` makes the estimate endpoint reject the request outright. The voice already implies the language and accent. Drop the tag and let the voice speak
+2. **`language` is a supported optional parameter (BCP-47).** Live testing in October 2026 priced `en-NG` and `en-US` requests normally. An earlier September 2026 run saw estimate rejections when a language tag was present; if an estimate rejects, try dropping the tag and letting the voice imply the locale
 3. **Text goes in `parameters.text`** (and the top-level prompt). Other options (`audio_encoding`, `speaking_rate`, `instruction`) go inside `parameters`
-4. **Inworld fails on long texts.** Past roughly 750 characters requests fail terminally and retries keep failing. Under about 350 characters is safe. For long scripts: split into chunks, submit in parallel, join with ffmpeg:
+4. **Inworld is documented to 2,000 characters per request, but long texts have failed in practice.** In our testing, requests past roughly 750 characters failed terminally and retries kept failing, while under about 350 characters was reliably safe. Treat the documented 2,000 as a ceiling, not a target: split long scripts into chunks, submit in parallel, join with ffmpeg:
    ```
    ffmpeg -i part1.ogg -i part2.ogg -filter_complex "[0:a][1:a]concat=n=2:v=0:a=1[out]" -map "[out]" -c:a libopus -b:a 48k joined.ogg
    ```
@@ -55,7 +55,7 @@ Listen to the same text across engines before choosing. The difference in warmth
 
 ## Choosing fast
 
-- **Narration for videos or stories:** MiniMax Captivating Storyteller (cheap, human) or Inworld Blake with CREATIVE delivery (warmer, pricier)
+- **Narration for videos or stories:** MiniMax Captivating Storyteller (single-request long texts) or Inworld Blake with CREATIVE delivery (warmer delivery)
 - **Character voices:** Inworld, no contest
 - **Bulk/utility lines:** `inworld-tts-2-flash`
 - **Nigerian-accented English:** Inworld has native voices (Emeka, Tunde, Chioma, Folake, Amara, Amina)
@@ -67,4 +67,4 @@ A client timeout on a TTS submit is not a failure. See `02-spend-gates-and-recov
 
 ---
 
-*Disclosure: this tutorial is part of the GMI Clouder program. All GMI outputs shown are real generations from the author's own account. [insert GMI compliance disclosure line]*
+*Disclosure: this tutorial was produced as part of the GMI Clouder program (paid). All GMI outputs shown are real generations from the author's own account.*

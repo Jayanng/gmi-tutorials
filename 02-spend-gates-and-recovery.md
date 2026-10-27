@@ -4,7 +4,7 @@
 
 ## The problem
 
-Autonomous agents generating media on real money face three failure modes:
+Autonomous agents generating media with real money at stake face three failure modes:
 
 1. The agent spends without checking the price first
 2. A request times out client-side, the agent retries, and gets charged twice
@@ -27,14 +27,14 @@ submit_generation(...)
 Rules that matter:
 
 - **Never chain a re-submit after a rejection without a fresh approval.** Agents love to "retry with improvements". That is a second charge
-- **Estimates return the total for the requested duration**, not a per-second rate. Read the number as-is
+- **Estimates return the total for the requested duration**, not a per-second rate. Note the estimate is a list price; the amount actually charged can be lower after your organization's discount
 - The estimate is also your sanity check: a wildly wrong price usually means a wrong parameter (see Pattern 4)
 
 ## Pattern 2: balance is checked per request, not per batch
 
 GMI checks your balance at every submit. A cheap batch can succeed minutes before a bigger single submit is refused. Practical consequence: **generate must-have assets first** (the voiceover clips), nice-to-haves last (the music bed). If a nice-to-have gets refused at the end, you still have a complete deliverable.
 
-Also: an insufficient-balance response on submit happens BEFORE queueing. "Not submitted" means nothing was charged. That is different from Pattern 3.
+Also: in our testing an insufficient-balance response arrived before queueing and nothing was charged, which is different from Pattern 3. Verify with `get_account_summary` after any failure rather than assuming.
 
 ## Pattern 3: a timeout is not a failure
 
@@ -96,4 +96,4 @@ In production this gate has never lost an asset and never double-charged. The on
 
 ---
 
-*Disclosure: this tutorial is part of the GMI Clouder program. All GMI outputs shown are real generations from the author's own account. [insert GMI compliance disclosure line]*
+*Disclosure: this tutorial was produced as part of the GMI Clouder program (paid). All GMI outputs shown are real generations from the author's own account.*

@@ -10,7 +10,7 @@ On a laptop this is a one-command setup. On a headless server it is a trap. Here
 
 ## The trap
 
-The standard CLI login flow for MCP OAuth opens a browser callback on `127.0.0.1:<port>`. On a remote box that page never loads. Worse, most CLI flows rotate their OAuth state every ~60 seconds, so by the time you approve on your phone and paste the callback back, the state has rotated and the exchange fails. Retrying in a loop makes it worse: every failed attempt registers a new OAuth client and burns another approval.
+The standard CLI login flow for MCP OAuth opens a browser callback on `127.0.0.1:<port>`. On a remote box that page never loads. Worse, in our testing some CLI flows rotated their OAuth state roughly every 60 seconds, so by the time you approve on your phone and paste the callback back, the state has rotated and the exchange fails. Retrying in a loop makes it worse: in our runs each failed attempt registered a new OAuth client and burned another approval.
 
 ## The working method
 
@@ -61,17 +61,17 @@ resp = requests.post(TOKEN_ENDPOINT, data={
 
 ## Verify it works
 
-Call a free tool first. `search_docs` or `get_account_summary` are read-only and cost nothing. If those answer, the connection is healthy and generation tools will work when your balance allows.
+Call a free tool first. `search_docs` or `get_account_summary` are read-only and cost nothing. If those answer, the connection is healthy and generation tools will work when your balance allows and the connection holds generation scope; a refusal on a funded account is often a scope problem, not a broken connection.
 
 ## Gotchas worth knowing
 
 - MCP tool lists can go stale mid-session in some agent runtimes. If previously working tools suddenly report "not a deferrable tool", do not loop on it: reconnect or fall back to a direct HTTP driver
 - Result objects come in two shapes: text (JSON status) and resource links (the output file URL). Branch on the type before assuming either
-- The server is generous with read calls: `list_generations` and `get_generation` work even when your balance is zero, which makes them your recovery path when paid calls start failing
+- In our testing the read calls stayed available at zero balance: `list_generations` and `get_generation` kept working when paid generation was refused, which makes them your recovery path when paid calls start failing
 
 That is the whole setup. Once the token is stored correctly and refreshing, the agent gets ten GMI tools over one connection.
 
 
 ---
 
-*Disclosure: this tutorial is part of the GMI Clouder program. All GMI outputs shown are real generations from the author's own account. [insert GMI compliance disclosure line]*
+*Disclosure: this tutorial was produced as part of the GMI Clouder program (paid). All GMI outputs shown are real generations from the author's own account.*
