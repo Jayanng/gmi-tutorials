@@ -30,7 +30,7 @@ All files in `samples/tts/` were generated on GMI Cloud:
 - `gmi_minimax_magnetic.ogg` — MiniMax magnetic narration voice
 - `n1.mp3`, `n2.mp3` — production narration clips from a finished piece
 
-Listen to the same text across engines before choosing. The difference in warmth is audible in three seconds.
+Listen to the same text across engines before choosing. The difference in warmth is audible in three seconds. Quality impressions in this guide are the author's own from testing, not official product claims.
 
 ## Parameter rules (each of these cost real debugging time)
 

@@ -10,9 +10,9 @@ GMI Cloud serves `minimax-music-3.0` for text-to-music generation. It is billed 
 
 Three real tracks generated through the GMI generation API, in `samples/music/`:
 
-- `f810749a...mp3` — 3.0 MB
-- `df126c5d...mp3` — 2.5 MB
-- `9e299915...mp3` — 0.9 MB
+- `gmi-music-f810749a-...mp3` — 3.1 MB, 96.6 s
+- `gmi-music-df126c5d-...mp3` — 2.5 MB, 77.8 s
+- `gmi-music-9e299915-...mp3` — 1.0 MB, 30.0 s
 
 Same pipeline as every GMI generation: `estimate_generation` (free) then `submit_generation`, results delivered as downloadable media URLs.
 
