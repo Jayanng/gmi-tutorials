@@ -11,7 +11,7 @@ Practical guides for building with GMI Cloud, written from production use. All s
 
 ## Samples
 
-- `samples/tts/` — 12 real TTS outputs across Inworld and MiniMax voices
+- `samples/tts/` — 11 real TTS outputs across Inworld and MiniMax voices
 - `samples/music/` — 3 generated music tracks
 - `samples/images/` — generated image frames (Gemini image model)
 

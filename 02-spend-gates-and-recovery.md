@@ -92,3 +92,8 @@ def generate_with_gate(prompt, params, must_have=True):
 In production this gate has never lost an asset and never double-charged. The one rule to remember: **on GMI, the expensive mistake is not spending too much on a generation, it is paying twice for one.**
 
 *All samples in `samples/` were generated through these flows.*
+
+
+---
+
+*Disclosure: this tutorial is part of the GMI Clouder program. All GMI outputs shown are real generations from the author's own account. [insert GMI compliance disclosure line]*

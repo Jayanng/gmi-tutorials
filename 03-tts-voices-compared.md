@@ -16,7 +16,7 @@ GMI Cloud serves two strong TTS families. They price and behave differently:
 
 There is also `inworld-tts-2-flash`, the cheap Inworld variant, good for drafts and bulk lines.
 
-**Cost intuition:** a 130-character line is about $0.45 on Inworld vs about $0.002 on MiniMax. For long-form narration MiniMax is dramatically cheaper; for personality and warmth Inworld's premium voices are worth it.
+**Cost intuition (pricing at time of writing, October 2026; re-check `estimate_generation`):** a 130-character line is about $0.45 on Inworld vs about $0.002 on MiniMax. For long-form narration MiniMax is dramatically cheaper; for personality and warmth Inworld's premium voices are worth it.
 
 ## The samples
 
@@ -24,7 +24,7 @@ All files in `samples/tts/` were generated on GMI Cloud:
 
 - `gmi_blake_story_condensed.ogg` — Inworld Blake, CREATIVE delivery, storytelling
 - `gmi_ronald.ogg`, `gmi_amina.ogg`, `gmi_chioma.ogg` — Inworld voice personalities
-- `ng_voice_male.mp3`, `ng_voice_female.mp3` — Inworld Nigerian voices (Emeka, Amina)
+- `ng_voice_male.mp3`, `ng_voice_female.mp3` — Nigerian-accented Inworld voices (the voice enum includes Emeka, Tunde, Chioma, Folake, Amara, and Amina)
 - `gmi_minimax_storyteller.mp3` — MiniMax `English_CaptivatingStoryteller`
 - `gmi_minimax_deepgentleman.ogg` — MiniMax `English_Deep-VoicedGentleman`
 - `gmi_minimax_magnetic.ogg` — MiniMax magnetic narration voice
@@ -63,3 +63,8 @@ Listen to the same text across engines before choosing. The difference in warmth
 ## The recovery rule applies here too
 
 A client timeout on a TTS submit is not a failure. See `02-spend-gates-and-recovery.md`: recover via `list_generations` filtered to the model, then fetch by request_id. When recovering timed-out batches you cannot map request_id to voice directly; infer by creation order, and if any line was previously generated as a sample, match by exact duration.
+
+
+---
+
+*Disclosure: this tutorial is part of the GMI Clouder program. All GMI outputs shown are real generations from the author's own account. [insert GMI compliance disclosure line]*

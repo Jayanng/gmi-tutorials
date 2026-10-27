@@ -70,3 +70,8 @@ Call a free tool first. `search_docs` or `get_account_summary` are read-only and
 - The server is generous with read calls: `list_generations` and `get_generation` work even when your balance is zero, which makes them your recovery path when paid calls start failing
 
 That is the whole setup. Once the token is stored correctly and refreshing, the agent gets ten GMI tools over one connection.
+
+
+---
+
+*Disclosure: this tutorial is part of the GMI Clouder program. All GMI outputs shown are real generations from the author's own account. [insert GMI compliance disclosure line]*

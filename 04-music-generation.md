@@ -54,3 +54,8 @@ Every stage is one API family, one account, one spend gate. The music stage is t
 ## Cost reality
 
 Music generation on GMI is billed per generation and priced in cents, not dollars. Generate candidates without anxiety, but keep the estimate-first gate: the discipline matters more than the amount.
+
+
+---
+
+*Disclosure: this tutorial is part of the GMI Clouder program. All GMI outputs shown are real generations from the author's own account. [insert GMI compliance disclosure line]*
